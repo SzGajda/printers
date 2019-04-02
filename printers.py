@@ -42,6 +42,14 @@ class printer:
 			x += "\nType: " + self.type + "; \tModel: " + self.model + "; \tHow many: " + str(self.quantity) + "; \tColor: Yellow"
 			x += "\nType: " + self.type + "; \tModel: " + self.model + "; \tHow many: " + str(self.quantity) + "; \tColor: Black"
 		return x
+	def model(self):
+		return self.model
+	def type(self):
+		return self.type
+	def quantity(self):
+		return self.quantity
+	def color(self):
+		return self.color
 	def more(self):
 		self.quantity += 1
 
@@ -78,3 +86,16 @@ c = 0
 for i in printers:
 	print(str(printers[c].info()))
 	c+=1
+with open('Pulpit/newglpi.csv', 'w') as csvfilew:
+	printer_writer = csv.writer(csvfilew, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+	c = 0
+	for i in printers:
+		if(printers[c].color == "Black"):
+			printer_writer.writerow([str(printers[c].type), str(printers[c].model), str(printers[c].quantity), str(printers[c].color)])
+			c+=1
+		else:
+			printer_writer.writerow([str(printers[c].type), str(printers[c].model), str(printers[c].quantity), 'Cyan'])
+			printer_writer.writerow([str(printers[c].type), str(printers[c].model), str(printers[c].quantity), 'Magenta'])
+			printer_writer.writerow([str(printers[c].type), str(printers[c].model), str(printers[c].quantity), 'Yellow'])
+			printer_writer.writerow([str(printers[c].type), str(printers[c].model), str(printers[c].quantity), 'Black'])
+			c+=1
